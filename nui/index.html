@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>낚시 NPC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+    <div class="head-label-overlay is-hidden" id="head-label-overlay">
+        <div class="head-label-role" id="head-label-role"></div>
+        <div class="head-label-name" id="head-label-name"></div>
+    </div>
+
+    <div class="menu-shell ui-hidden" id="menu-shell">
+        <div class="screen-fade"></div>
+
+        <div class="npc-label">
+            <div class="npc-role" id="npc-role"></div>
+            <div class="npc-name" id="npc-name"></div>
+        </div>
+
+        <aside class="info-panel is-hidden" id="info-panel">
+            <div class="panel-header" id="panel-header">낚시 교관 메뉴</div>
+            <div class="panel-section" id="panel-section">낚시 방법 안내</div>
+            <div class="panel-body">
+                <section class="shop-layout is-hidden" id="shop-layout">
+                    <div class="shop-overview">
+                        <div class="shop-balance">
+                            <span class="shop-balance-label" id="shop-balance-label">보유 코인</span>
+                            <strong class="shop-balance-value" id="shop-balance-value">48,000 COIN</strong>
+                        </div>
+                        <div class="shop-balance-meta" id="shop-balance-meta">기본 장비를 먼저 맞추면 낚시가 훨씬 안정적입니다.</div>
+                    </div>
+
+                    <div class="shop-list" id="shop-list"></div>
+                </section>
+
+                <section class="sell-layout is-hidden" id="sell-layout">
+                    <div class="sell-overview">
+                        <div class="sell-balance">
+                            <span class="sell-balance-label" id="sell-balance-label">보유 코인</span>
+                            <strong class="sell-balance-value" id="sell-balance-value">0 COIN</strong>
+                        </div>
+                        <div class="sell-balance-meta" id="sell-balance-meta">등급이 높은 물고기일수록 단가가 높습니다.</div>
+                    </div>
+
+                    <div class="sell-list" id="sell-list"></div>
+
+                    <div class="sell-footer">
+                        <button class="sell-all-button" id="sell-all-button">전체 판매</button>
+                    </div>
+                </section>
+
+                <section class="quest-layout is-hidden" id="quest-layout">
+                    <div class="quest-tabs" id="quest-tabs"></div>
+
+                    <div class="quest-summary">
+                        <div class="quest-summary-top">
+                            <div class="quest-summary-title" id="quest-summary-title">일일 퀘스트</div>
+                            <div class="quest-summary-reset" id="quest-summary-reset">매일 00:00 초기화</div>
+                        </div>
+                        <div class="quest-summary-desc" id="quest-summary-desc">
+                            반복 의뢰가 여기에 표시됩니다.
+                        </div>
+                    </div>
+
+                    <div class="quest-list" id="quest-list"></div>
+                </section>
+
+                <div class="panel-card" id="info-card">
+                    <div class="card-title" id="card-title">기본 낚시 안내</div>
+                    <div class="card-desc" id="card-desc">
+                        Y키를 눌러 낚시를 시작합니다. 물가 또는 선착장에서만 사용할 수 있으며,
+                        미끼를 던진 뒤 물고기가 걸리면 초록 구간에서 다시 Y키를 눌러 성공하세요.
+                    </div>
+                    <div class="tag-group" id="tag-group">
+                        <span class="info-tag">Y키</span>
+                        <span class="info-tag">물가 필요</span>
+                        <span class="info-tag">초록 구간</span>
+                    </div>
+                    <div class="card-footer">
+                        <button class="action-button" id="action-button">튜토리얼 시작</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="collection-screen is-hidden" id="collection-screen">
+            <div class="collection-shell">
+                <header class="collection-topbar">
+                    <div class="collection-title" id="collection-title">도감</div>
+                </header>
+
+                <div class="collection-main">
+                    <aside class="collection-sidebar" id="collection-sidebar"></aside>
+
+                    <div class="collection-groups" id="collection-groups"></div>
+
+                    <section class="collection-preview">
+                        <div class="collection-preview-header">
+                            <div class="collection-featured-name" id="collection-featured-name">도감 미리보기</div>
+                            <div class="collection-featured-region" id="collection-featured-region">어종 사진이 들어오면 여기에
+                                표시됩니다.</div>
+                        </div>
+
+                        <div class="collection-preview-stage" id="collection-preview-stage">
+                            <img class="collection-featured-image is-hidden" id="collection-featured-image" alt="" />
+                            <div class="collection-preview-empty" id="collection-preview-empty">사진 준비 중</div>
+                        </div>
+
+                        <div class="collection-featured-description" id="collection-featured-description">
+                            선택한 등급에 사진 기반 도감을 추가하면 이 영역이 갱신됩니다.
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <div class="dialogue-line" id="dialogue-line">
+            어이, 젊은이. 오늘도 낚시하러 왔나? 필요한 게 있으면 말해보게.
+        </div>
+
+        <div class="bottom-bar">
+            <button class="menu-button" data-menu="shop">상점</button>
+            <button class="menu-button" data-menu="sell">판매</button>
+            <button class="menu-button" data-menu="collection">도감</button>
+            <button class="menu-button" data-menu="quest">퀘스트</button>
+            <button class="menu-button is-back" data-menu="back">뒤로가기</button>
+        </div>
+    </div>
+
+    <!-- 낚시 미니게임 HUD (vrp_fishing_game) -->
+    <div id="fishing-hud">
+        <div id="catchPrompt" class="fishing-prompt fishing-hidden">
+            <span class="fishing-key">[Y]</span>
+            <span class="fishing-text">키를 눌러 물고기를 잡습니다.</span>
+        </div>
+
+        <div id="minigame" class="fishing-hidden">
+            <div id="mainBar">
+                <div id="movingBar"></div>
+            </div>
+            <div id="timerBar"></div>
+        </div>
+    </div>
+
+    <script src="./js/shop.js"></script>
+    <script src="./js/sell.js"></script>
+    <script src="./js/collection.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/fishing_game.js"></script>
+</body>
+
+</html>
